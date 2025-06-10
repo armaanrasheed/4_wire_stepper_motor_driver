@@ -156,8 +156,8 @@ class StepperMotorControl:
         if name in self.saved_positions:
             target_position = self.saved_positions[name]
             steps_to_move = target_position - self.current_position
-            direction = 1 if steps_to_move > 0 else 0
-            self.step_motor(abs(steps_to_move), delay)
+            # Pass the signed value so step_motor can determine direction
+            self.step_motor(steps_to_move, delay)
             print(f"Moved to saved position '{name}' at {target_position} steps.")
         else:
             print(f"Error: Saved position '{name}' not found.")
